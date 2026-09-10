@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusiKaoz - Registro de Sujeto</title>
+  <link rel="stylesheet" href="../login/login.css">
+</head>
+<body class="cybergoth-layout">
+  <main class="auth-box" style="max-width: 550px;">
+    <header class="auth-box__header">
+      <div class="auth-box__hazard-icon">☣</div>
+      <h1 class="auth-box__title">REGISTRO_NUEVO</h1>
+      <span class="auth-box__subtitle">INGRESO_DE_CREDENCIALES_E_IDENTIDAD</span>
+    </header>
+
+    <form class="auth-box__form" id="register-form">
+      <div class="auth-field">
+        <label class="auth-field__label">RUN (SIN PUNTOS NI GUION)</label>
+        <input class="auth-field__input" type="text" id="run" placeholder="19011022K" required>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="auth-field">
+          <label class="auth-field__label">NOMBRE</label>
+          <input class="auth-field__input" type="text" id="nombre" maxlength="50" required>
+        </div>
+        <div class="auth-field">
+          <label class="auth-field__label">APELLIDOS</label>
+          <input class="auth-field__input" type="text" id="apellidos" maxlength="100" required>
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-field__label">CORREO INSTITUCIONAL/PERMITIDO</label>
+        <input class="auth-field__input" type="email" id="correo" placeholder="usuario@duoc.cl" required>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="auth-field">
+          <label class="auth-field__label">REGION</label>
+          <select class="auth-field__input" id="region" required>
+            <option value="">SELECCIONAR</option>
+            <option value="RM">Región Metropolitana</option>
+            <option value="VALPO">Valparaíso</option>
+          </select>
+        </div>
+        <div class="auth-field">
+          <label class="auth-field__label">COMUNA</label>
+          <select class="auth-field__input" id="comuna" required disabled>
+            <option value="">SELECCIONE REGION</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-field__label">DIRECCION</label>
+        <input class="auth-field__input" type="text" id="direccion" maxlength="300" required>
+      </div>
+
+      <button class="auth-box__button" type="submit">COMPLETAR_REGISTRO</button>
+    </form>
+  </main>
+  <script src="register.js"></script>
+</body>
+</html>

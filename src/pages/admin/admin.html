@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusiKaoz - Admin Control</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin">
+  <aside class="admin-sidebar">
+    <div class="admin-sidebar__brand">
+      <span class="admin-sidebar__hazard">☣</span> KAOZ_ROOT
+    </div>
+    <nav class="admin-sidebar__nav">
+      <a class="admin-sidebar__link admin-sidebar__link--active" href="#">[01] METRICAS</a>
+      <a class="admin-sidebar__link" href="#">[02] USUARIOS</a>
+      <a class="admin-sidebar__link" href="#">[03] TRANSACCIONES</a>
+      <a class="admin-sidebar__link" href="#">[04] MODERACION</a>
+    </nav>
+    <div class="admin-sidebar__footer">
+      <span>SIS_VER: 1.0.0-ROOT</span>
+    </div>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-main__header">
+      <h1 class="admin-main__title">// PANEL_DE_CONTROL_ADMINISTRATIVO</h1>
+      <span class="admin-main__badge">SISTEMA_OPERATIVO</span>
+    </header>
+
+    <section class="admin-metrics">
+      <article class="metric-card">
+        <span class="metric-card__label">INGRESOS_ESTIMADOS</span>
+        <span class="metric-card__value">CLP $1.240.000</span>
+        <span class="metric-card__sub">KAOZ_PASS: 124 ACTIVOS</span>
+      </article>
+      <article class="metric-card">
+        <span class="metric-card__label">USUARIOS_REGISTRADOS</span>
+        <span class="metric-card__value">1,892</span>
+        <span class="metric-card__sub">FREE_TIER: 1,768</span>
+      </article>
+      <article class="metric-card">
+        <span class="metric-card__label">TRANSCODIFICACION</span>
+        <span class="metric-card__value">14 EN_COLA</span>
+        <span class="metric-card__sub">FLAC -> 128kbps</span>
+      </article>
+    </section>
+
+    <section class="admin-section">
+      <h2 class="admin-section__title">[ GESTION_DE_MEMBRESIAS_Y_USUARIOS ]</h2>
+      <table class="admin-table">
+        <thead class="admin-table__head">
+          <tr class="admin-table__row">
+            <th class="admin-table__cell admin-table__cell--head">ID</th>
+            <th class="admin-table__cell admin-table__cell--head">USUARIO</th>
+            <th class="admin-table__cell admin-table__cell--head">PLAN</th>
+            <th class="admin-table__cell admin-table__cell--head">ESTADO</th>
+            <th class="admin-table__cell admin-table__cell--head">ACCIONES</th>
+          </tr>
+        </thead>
+        <tbody class="admin-table__body">
+          <tr class="admin-table__row">
+            <td class="admin-table__cell">#001</td>
+            <td class="admin-table__cell">User_Goth99</td>
+            <td class="admin-table__cell"><span class="badge badge--free">FREE</span></td>
+            <td class="admin-table__cell">ACTIVO</td>
+            <td class="admin-table__cell">
+              <button class="admin-btn admin-btn--upgrade js-action-btn" data-user="User_Goth99" data-action="UPGRADE">UPGRADE_PASS</button>
+            </td>
+          </tr>
+          <tr class="admin-table__row">
+            <td class="admin-table__cell">#002</td>
+            <td class="admin-table__cell">NeuroTerminal</td>
+            <td class="admin-table__cell"><span class="badge badge--pass">KAOZ_PASS</span></td>
+            <td class="admin-table__cell">ACTIVO</td>
+            <td class="admin-table__cell">
+              <button class="admin-btn admin-btn--danger js-action-btn" data-user="NeuroTerminal" data-action="REVOKE">REVOCAR</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+  <script src="admin.js"></script>
+</body>
+</html>

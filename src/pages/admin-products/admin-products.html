@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>MusiKaoz - Mantenedor Productos</title>
+  <link rel="stylesheet" href="../admin/admin.css">
+</head>
+<body class="admin">
+  <main class="admin-main" style="grid-column: 1 / -1;">
+    <header class="admin-main__header">
+      <h1 class="admin-main__title">// MANTENEDOR_DE_PRODUCTOS</h1>
+      <a href="../admin/admin.html" class="admin-btn admin-btn--upgrade">VOLVER</a>
+    </header>
+
+    <form id="product-form" style="background: #0f1117; padding: 1.5rem; border: 1px solid #1e242d; margin-bottom: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+      <input class="admin-btn" style="text-align: left; color:#fff;" type="text" id="p-code" placeholder="CÓDIGO (MIN 3 CARACT)" required>
+      <input class="admin-btn" style="text-align: left; color:#fff;" type="text" id="p-name" placeholder="NOMBRE PRODUCTO" maxlength="100" required>
+      <input class="admin-btn" style="text-align: left; color:#fff;" type="number" id="p-price" placeholder="PRECIO (CLP)" min="0" required>
+      <input class="admin-btn" style="text-align: left; color:#fff;" type="number" id="p-stock" placeholder="STOCK" min="0" required>
+      <input class="admin-btn" style="text-align: left; color:#fff;" type="number" id="p-critical" placeholder="STOCK CRÍTICO">
+      <select class="admin-btn" style="text-align: left; color:#fff;" id="p-cat" required>
+        <option value="">CATEGORÍA</option>
+        <option value="BEATS">BEATS</option>
+        <option value="SAMPLES">SAMPLE PACKS</option>
+      </select>
+      <button type="submit" class="admin-btn admin-btn--upgrade" style="grid-column: span 3;">GUARDAR_PRODUCTO</button>
+    </form>
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th class="admin-table__cell">CODIGO</th>
+          <th class="admin-table__cell">NOMBRE</th>
+          <th class="admin-table__cell">PRECIO</th>
+          <th class="admin-table__cell">STOCK</th>
+          <th class="admin-table__cell">ESTADO</th>
+        </tr>
+      </thead>
+      <tbody id="products-list"></tbody>
+    </table>
+  </main>
+  <script src="admin-products.js"></script>
+</body>
+</html>

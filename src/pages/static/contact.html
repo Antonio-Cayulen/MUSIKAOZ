@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>MusiKaoz - Contacto</title>
+  <link rel="stylesheet" href="../login/login.css">
+</head>
+<body class="cybergoth-layout">
+  <main class="auth-box">
+    <header class="auth-box__header"><h1 class="auth-box__title">CONTACTO</h1></header>
+    <form class="auth-box__form" id="contact-form">
+      <div class="auth-field"><label class="auth-field__label">NOMBRE</label><input class="auth-field__input" type="text" maxlength="100" required></div>
+      <div class="auth-field"><label class="auth-field__label">CORREO</label><input class="auth-field__input" type="email" required></div>
+      <div class="auth-field"><label class="auth-field__label">COMENTARIO</label><textarea class="auth-field__input" maxlength="500" rows="4" required></textarea></div>
+      <button class="auth-box__button" type="submit">ENVIAR_MENSAJE</button>
+    </form>
+  </main>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('[SISTEMA]: Comentario recibido.');
+      window.location.href = '../feed/feed.html';
+    });
+  </script>
+</body>
+</html>

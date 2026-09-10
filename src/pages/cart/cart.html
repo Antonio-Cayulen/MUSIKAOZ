@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusiKaoz - Carrito</title>
+  <link rel="stylesheet" href="../marketplace/marketplace.css">
+</head>
+<body class="marketplace">
+  <aside class="sidebar">
+    <div class="sidebar__brand"><span class="sidebar__hazard">☣</span> MUSIKAOZ</div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__link" href="../feed/feed.html">[01] FEED_CENTRAL</a>
+      <a class="sidebar__link" href="../marketplace/marketplace.html">[02] BEAT_MARKET</a>
+    </nav>
+  </aside>
+
+  <main class="market-main">
+    <header class="market-header">
+      <h1 class="market-header__title">// CARRITO_DE_COMPRAS</h1>
+    </header>
+
+    <table class="admin-table" style="width: 100%; color: #d1d5db; background: #0f1117; border: 1px solid #1e242d;">
+      <thead>
+        <tr style="border-bottom: 1px solid #1e242d; text-align: left;">
+          <th style="padding: 1rem;">PRODUCTO</th>
+          <th style="padding: 1rem;">PRECIO</th>
+          <th style="padding: 1rem;">ACCION</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items"></tbody>
+    </table>
+
+    <div style="margin-top: 2rem; display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="color: #39ff14;" id="cart-total">TOTAL: CLP $0</h3>
+      <button class="beat-card__btn beat-card__btn--buy" id="btn-checkout">PROCESAR_PAGO</button>
+    </div>
+  </main>
+  <script src="cart.js"></script>
+</body>
+</html>

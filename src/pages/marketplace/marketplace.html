@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusiKaoz - Beat Marketplace</title>
+  <link rel="stylesheet" href="marketplace.css">
+</head>
+<body class="marketplace">
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <span class="sidebar__hazard">☣</span> MUSIKAOZ
+    </div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__link" href="../feed/feed.html">[01] FEED_CENTRAL</a>
+      <a class="sidebar__link sidebar__link--active" href="#">[02] BEAT_MARKET</a>
+      <a class="sidebar__link" href="../admin/admin.html">[03] ADMIN_PANEL</a>
+    </nav>
+    <div class="sidebar__cart">
+      <span class="sidebar__cart-title">CARRITO:</span>
+      <span class="sidebar__cart-count" id="cart-count">0 ITEMS</span>
+    </div>
+  </aside>
+
+  <main class="market-main">
+    <header class="market-header">
+      <h1 class="market-header__title">// BAZAR_DE_RITMOS_Y_LICENCIAS</h1>
+      <div class="market-header__search">
+        <input class="market-header__input" type="text" placeholder="Buscar por BPM, género (Reggaeton, Industrial, Trap)...">
+      </div>
+    </header>
+
+    <div class="market-filters">
+      <button class="market-filters__tag market-filters__tag--active" data-filter="all">TODOS</button>
+      <button class="market-filters__tag" data-filter="reggaeton">REGGAETON / PERREO</button>
+      <button class="market-filters__tag" data-filter="industrial">INDUSTRIAL / EBM</button>
+      <button class="market-filters__tag" data-filter="trap">CYBER-TRAP</button>
+      <button class="market-filters__tag" data-filter="synthwave">SYNTHWAVE</button>
+    </div>
+
+    <section class="beat-grid">
+      <article class="beat-card" data-genre="reggaeton">
+        <header class="beat-card__header">
+          <span class="beat-card__badge beat-card__badge--urban">REGGAETON</span>
+          <span class="beat-card__bpm">95 BPM / Cm</span>
+        </header>
+        <div class="beat-card__body">
+          <h2 class="beat-card__title">Dembow Subterráneo</h2>
+          <p class="beat-card__producer">Prod. KAOZ_PROD</p>
+        </div>
+        <div class="beat-card__licensing">
+          <div class="beat-card__price-option">
+            <span class="beat-card__license-type">MP3 LEASE</span>
+            <span class="beat-card__price">CLP $18.000</span>
+          </div>
+          <div class="beat-card__price-option">
+            <span class="beat-card__license-type">EXCLUSIVA (STEMS)</span>
+            <span class="beat-card__price">CLP $135.000</span>
+          </div>
+        </div>
+        <footer class="beat-card__footer">
+          <button class="beat-card__btn beat-card__btn--preview js-preview-btn" data-title="Dembow Subterráneo">PREVIEW</button>
+          <button class="beat-card__btn beat-card__btn--buy js-buy-btn">COMPRAR</button>
+        </footer>
+      </article>
+
+      <article class="beat-card" data-genre="industrial">
+        <header class="beat-card__header">
+          <span class="beat-card__badge beat-card__badge--industrial">EBM / TECHNO</span>
+          <span class="beat-card__bpm">138 BPM / F#m</span>
+        </header>
+        <div class="beat-card__body">
+          <h2 class="beat-card__title">Reactor Core Kick</h2>
+          <p class="beat-card__producer">Prod. CyberSlave</p>
+        </div>
+        <div class="beat-card__licensing">
+          <div class="beat-card__price-option">
+            <span class="beat-card__license-type">WAV LEASE</span>
+            <span class="beat-card__price">CLP $27.000</span>
+          </div>
+          <div class="beat-card__price-option">
+            <span class="beat-card__license-type">EXCLUSIVA (STEMS)</span>
+            <span class="beat-card__price">CLP $180.000</span>
+          </div>
+        </div>
+        <footer class="beat-card__footer">
+          <button class="beat-card__btn beat-card__btn--preview js-preview-btn" data-title="Reactor Core Kick">PREVIEW</button>
+          <button class="beat-card__btn beat-card__btn--buy js-buy-btn">COMPRAR</button>
+        </footer>
+      </article>
+    </section>
+  </main>
+
+  <script src="marketplace.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MusiKaoz - Central Feed</title>
+  <link rel="stylesheet" href="feed.css">
+</head>
+<body class="dashboard">
+  <aside class="sidebar">
+    <div class="sidebar__brand">
+      <span class="sidebar__hazard">☣</span> MUSIKAOZ
+    </div>
+    <nav class="sidebar__nav">
+      <a class="sidebar__link sidebar__link--active" href="#">[01] FEED_CENTRAL</a>
+      <a class="sidebar__link" href="#">[02] ENTROPIA_RADIO</a>
+      <a class="sidebar__link" href="#">[03] PERFIL_CUSTOM</a>
+      <a class="sidebar__link" href="#">[04] KAOZ_PASS</a>
+    </nav>
+    <div class="sidebar__status">
+      <span class="sidebar__status-label">ESTADO:</span>
+      <span class="sidebar__status-value">MEMBRESIA_FREE</span>
+    </div>
+  </aside>
+
+  <main class="feed">
+    <header class="feed__header">
+      <h1 class="feed__title">// SECTOR_TRANSMISIONES</h1>
+      <div class="feed__filter">
+        <button class="feed__tag feed__tag--active">TODOS</button>
+        <button class="feed__tag">INDUSTRIAL</button>
+        <button class="feed__tag">CYBERGOTH</button>
+        <button class="feed__tag">EBM</button>
+      </div>
+    </header>
+
+    <section class="feed__grid">
+      <article class="track-card">
+        <div class="track-card__cover">
+          <span class="track-card__bitrate">128kbps</span>
+        </div>
+        <div class="track-card__body">
+          <h2 class="track-card__title">Acid Leak Vector</h2>
+          <p class="track-card__artist">User_Goth99</p>
+          <div class="track-card__actions">
+            <button class="track-card__btn js-play-btn" data-track="Acid Leak Vector">PLAY</button>
+            <span class="track-card__tag">[FREE_TIER]</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="track-card track-card--premium">
+        <div class="track-card__cover">
+          <span class="track-card__bitrate">FLAC/24bit</span>
+        </div>
+        <div class="track-card__body">
+          <h2 class="track-card__title">Radioactive Decay</h2>
+          <p class="track-card__artist">NeuroTerminal</p>
+          <div class="track-card__actions">
+            <button class="track-card__btn js-play-btn" data-track="Radioactive Decay">PLAY</button>
+            <span class="track-card__tag track-card__tag--locked">[KAOZ_PASS]</span>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <footer class="player">
+    <div class="player__info">
+      <span class="player__status-dot"></span>
+      <span class="player__track-title" id="current-track">SIN_REPRODUCCION</span>
+    </div>
+    <div class="player__controls">
+      <button class="player__btn" id="btn-prev">PREV</button>
+      <button class="player__btn player__btn--main" id="btn-play">PLAY</button>
+      <button class="player__btn" id="btn-next">NEXT</button>
+    </div>
+    <div class="player__progress-bar">
+      <div class="player__progress-fill"></div>
+    </div>
+  </footer>
+
+  <script src="feed.js"></script>
+</body>
+</html>
