@@ -75,6 +75,9 @@
   margin: 0 0.75rem 0.75rem;
   padding: 0.5rem;
   transition: background-color 0.2s ease, color 0.2s ease;
+  text-align: center;
+  text-decoration: none;
+  display: block;
 }
 
 .product-card__action:hover {

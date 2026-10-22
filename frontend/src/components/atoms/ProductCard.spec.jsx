@@ -1,5 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render as rtlRender, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import ProductCard from './ProductCard';
+
+const render = (ui) => rtlRender(<MemoryRouter>{ui}</MemoryRouter>);
 
 describe('ProductCard', () => {
   const defaultProps = {
@@ -29,6 +32,19 @@ describe('ProductCard', () => {
     const spy = jasmine.createSpy('onAddToCart');
     render(<ProductCard {...defaultProps} onAddToCart={spy} />);
     screen.getByText('AÑADIR AL CARRITO').click();
-  expect(spy).toHaveBeenCalledTimes(1);
-});
+    expect(spy).toHaveBeenCalledTimes(1);
+  });
+  
+  it('renderiza un link VER LICENCIAS cuando recibe detailsHref', () => {
+    render(<ProductCard {...defaultProps} detailsHref="/product/1" />);
+    const link = screen.getByText('VER LICENCIAS');
+    expect(link.tagName).toBe('A');
+    expect(link.getAttribute('href')).toBe('/product/1');
+  });
+
+  it('muestra AÑADIR AL CARRITO cuando no recibe detailsHref', () => {
+    render(<ProductCard {...defaultProps} />);
+    expect(screen.queryByText('VER LICENCIAS')).toBeNull();
+    expect(screen.getByText('AÑADIR AL CARRITO')).toBeTruthy();
+  });
 });

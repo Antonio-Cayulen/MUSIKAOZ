@@ -14,3 +14,11 @@ export const getActiveProducts = async () => {
   const products = await getProducts();
   return products.filter((product) => product.estado === 'ACTIVO');
 };
+
+export const getProductById = async (id) => {
+  await delay(SIMULATED_LATENCY_MS);
+  const numericId = Number(id);
+  const product = mockData.products.find((p) => p.id === numericId);
+  if (!product) return null;
+  return { ...product };
+};

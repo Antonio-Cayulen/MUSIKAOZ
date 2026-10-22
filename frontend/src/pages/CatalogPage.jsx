@@ -29,10 +29,6 @@ const CatalogPage = () => {
   }, []);
 
   const handleAddToCart = (product) => {
-    if (product.tipoProducto === 'BEAT') {
-      // Requiere ProductDetail con selección explícita de licencia (pendiente).
-      return;
-    }
     addItem({
       productoId: product.id,
       nombre: product.nombre,

@@ -1,0 +1,129 @@
+.product-detail {
+  background: var(--bg-void);
+  color: var(--text-main);
+  display: grid;
+  font-family: var(--font-code);
+  gap: 2rem;
+  grid-template-columns: 1fr 1fr;
+  margin: 0 auto;
+  max-width: 960px;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.product-detail__media {
+  aspect-ratio: 1 / 1;
+  background: var(--surface-panel);
+  border: 1px solid var(--border-hazard);
+}
+
+.product-detail__image {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.product-detail__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-detail__type {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.25em;
+}
+
+.product-detail__title {
+  color: var(--text-main);
+  font-size: 1.6rem;
+  letter-spacing: 0.15em;
+  margin: 0;
+}
+
+.product-detail__licencias {
+  border: 1px solid var(--border-hazard);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin: 0;
+  padding: 0.85rem;
+}
+
+.product-detail__legend {
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  padding: 0 0.4rem;
+}
+
+.product-detail__licencia {
+  align-items: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: grid;
+  font-size: 0.8rem;
+  gap: 0.6rem;
+  grid-template-columns: auto 1fr auto;
+  padding: 0.55rem 0.7rem;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.product-detail__licencia:hover {
+  border-color: var(--toxic-green-dim);
+}
+
+.product-detail__licencia--active {
+  background: var(--toxic-green-dim);
+  border-color: var(--toxic-green);
+}
+
+.product-detail__licencia input {
+  accent-color: var(--toxic-green);
+}
+
+.product-detail__licencia-price {
+  color: var(--toxic-green);
+}
+
+.product-detail__price {
+  color: var(--toxic-green);
+  font-size: 1.5rem;
+}
+
+.product-detail__add {
+  background: var(--toxic-green);
+  border: none;
+  color: var(--bg-void);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  padding: 0.9rem;
+}
+
+.product-detail__add:hover {
+  filter: brightness(1.15);
+}
+
+.product-detail__status {
+  color: var(--text-muted);
+  grid-column: 1 / -1;
+  letter-spacing: 0.15em;
+  padding: 3rem;
+  text-align: center;
+}
+
+.product-detail__status--error {
+  color: var(--toxic-red);
+}
+
+@media (max-width: 720px) {
+  .product-detail {
+    grid-template-columns: 1fr;
+    padding: 1rem;
+  }
+}

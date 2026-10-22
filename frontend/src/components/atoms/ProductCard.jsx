@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import './ProductCard.css';
 
 const ProductCard = ({
@@ -6,11 +7,13 @@ const ProductCard = ({
   imagenUrl,
   tipoProducto,
   isOffer = false,
+  detailsHref = null,
   onAddToCart,
 }) => {
   const priceClassName = `product-card__price${
     isOffer ? ' product-card__price--offer' : ''
   }`;
+  const showDetails = Boolean(detailsHref);
 
   return (
     <article className="product-card">
@@ -30,13 +33,19 @@ const ProductCard = ({
         <span className={priceClassName}>${Number(precio).toFixed(2)}</span>
       </div>
 
-      <button
-        className="product-card__action"
-        type="button"
-        onClick={() => onAddToCart?.()}
-      >
-        AÑADIR AL CARRITO
-      </button>
+      {showDetails ? (
+        <Link className="product-card__action" to={detailsHref}>
+          VER LICENCIAS
+        </Link>
+      ) : (
+        <button
+          className="product-card__action"
+          type="button"
+          onClick={() => onAddToCart?.()}
+        >
+          AÑADIR AL CARRITO
+        </button>
+      )}
     </article>
   );
 };
