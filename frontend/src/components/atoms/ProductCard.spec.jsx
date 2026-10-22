@@ -24,4 +24,11 @@ describe('ProductCard', () => {
     render(<ProductCard {...defaultProps} />);
     expect(screen.queryByText('OFERTA')).toBeNull();
   });
+  
+  it('llama a onAddToCart al hacer clic en AÑADIR AL CARRITO', () => {
+    const spy = jasmine.createSpy('onAddToCart');
+    render(<ProductCard {...defaultProps} onAddToCart={spy} />);
+    screen.getByText('AÑADIR AL CARRITO').click();
+  expect(spy).toHaveBeenCalledTimes(1);
+});
 });
