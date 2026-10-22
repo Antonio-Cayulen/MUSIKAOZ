@@ -1,0 +1,83 @@
+.product-card {
+  background-color: var(--surface-panel);
+  border: 1px solid var(--border-hazard);
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-code);
+  transition: border-color 0.2s ease;
+}
+
+.product-card:hover {
+  border-color: var(--toxic-green);
+}
+
+.product-card__media {
+  aspect-ratio: 1 / 1;
+  background-color: var(--bg-void);
+  overflow: hidden;
+  position: relative;
+}
+
+.product-card__image {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.product-card__badge {
+  background-color: var(--toxic-red);
+  color: var(--bg-void);
+  font-size: 0.7rem;
+  left: 0.5rem;
+  letter-spacing: 0.15em;
+  padding: 0.25rem 0.5rem;
+  position: absolute;
+  top: 0.5rem;
+}
+
+.product-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem;
+}
+
+.product-card__title {
+  color: var(--text-main);
+  font-size: 1rem;
+  margin: 0;
+}
+
+.product-card__type {
+  color: var(--text-muted);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+}
+
+.product-card__price {
+  color: var(--toxic-green);
+  font-size: 1.1rem;
+}
+
+.product-card__price--offer {
+  color: var(--toxic-red);
+}
+
+.product-card__action {
+  background: transparent;
+  border: 1px solid var(--toxic-green);
+  color: var(--toxic-green);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  margin: 0 0.75rem 0.75rem;
+  padding: 0.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.product-card__action:hover {
+  background-color: var(--toxic-green);
+  color: var(--bg-void);
+}

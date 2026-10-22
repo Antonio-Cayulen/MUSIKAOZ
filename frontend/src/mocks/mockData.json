@@ -1,0 +1,52 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "nombre": "Trap Beat Midnight",
+      "precioBase": 29990.00,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=BEAT",
+      "tipoProducto": "BEAT",
+      "estado": "ACTIVO"
+    },
+    {
+      "id": 2,
+      "nombre": "Micrófono Condensador",
+      "precioBase": 15000.00,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=MIC",
+      "tipoProducto": "EQUIPO",
+      "estado": "ACTIVO"
+    },
+    {
+      "id": 3,
+      "nombre": "Boom Bap Beat Relic",
+      "precioBase": 19990.00,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=BEAT",
+      "tipoProducto": "BEAT",
+      "estado": "ACTIVO"
+    },
+    {
+      "id": 4,
+      "nombre": "Interfaz de Audio 2x2",
+      "precioBase": 220000.00,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=IFACE",
+      "tipoProducto": "EQUIPO",
+      "estado": "ACTIVO"
+    },
+    {
+      "id": 5,
+      "nombre": "Drill Beat Concrete",
+      "precioBase": 34500.00,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=BEAT",
+      "tipoProducto": "BEAT",
+      "estado": "INACTIVO"
+    },
+    {
+      "id": 6,
+      "nombre": "Monitores de Estudio 5\"",
+      "precioBase": 310000.00,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=MON",
+      "tipoProducto": "EQUIPO",
+      "estado": "ACTIVO"
+    }
+  ]
+}
