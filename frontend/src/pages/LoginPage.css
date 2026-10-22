@@ -1,0 +1,37 @@
+.login-page {
+  align-items: center;
+  background: var(--bg-void);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 2rem;
+  position: relative;
+}
+
+.login-page__decor {
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    var(--toxic-green-dim) 10px,
+    var(--toxic-green-dim) 20px
+  );
+  height: 180px;
+  left: 0;
+  opacity: 0.45;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  width: 180px;
+}
+
+@media (max-width: 480px) {
+  .login-page {
+    padding: 1rem;
+  }
+
+  .login-page__decor {
+    height: 100px;
+    width: 100px;
+  }
+}
