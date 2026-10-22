@@ -1,0 +1,101 @@
+.navbar {
+  align-items: center;
+  background: var(--surface-panel);
+  border-bottom: 1px solid var(--border-hazard);
+  display: flex;
+  font-family: var(--font-code);
+  gap: 1.5rem;
+  padding: 0.85rem 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar__brand {
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+}
+
+.navbar__brand-accent {
+  color: var(--toxic-green);
+}
+
+.navbar__links {
+  align-items: center;
+  display: flex;
+  flex: 1;
+  gap: 1.25rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__link {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.navbar__link:hover {
+  color: var(--text-main);
+}
+
+.navbar__link--admin {
+  color: var(--toxic-red);
+}
+
+.navbar__count {
+  color: var(--toxic-green);
+  margin-left: 0.35rem;
+}
+
+.navbar__session {
+  align-items: center;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.navbar__user {
+  color: var(--text-main);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+}
+
+.navbar__logout,
+.navbar__login {
+  background: transparent;
+  border: 1px solid var(--border-hazard);
+  color: var(--text-main);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  padding: 0.4rem 0.7rem;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.navbar__logout:hover,
+.navbar__login:hover {
+  border-color: var(--toxic-green);
+  color: var(--toxic-green);
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .navbar__links {
+    flex-basis: 100%;
+    justify-content: space-between;
+    order: 3;
+  }
+}
