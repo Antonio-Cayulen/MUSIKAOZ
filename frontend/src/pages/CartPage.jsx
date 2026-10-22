@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import './CartPage.css';
 
@@ -16,18 +17,16 @@ const CartPage = () => {
         <>
           <ul className="cart-page__items">
             {items.map((item) => (
-              <li className="cart-page__item" key={item.id}>
-                <span className="cart-page__item-name">{item.nombre}</span>
-                <span className="cart-page__item-qty">
-                  x{item.cantidad}
-                </span>
+              <li className="cart-page__item" key={item.key}>
+                <span className="cart-page__item-name">{item.nombreSnapshot}</span>
+                <span className="cart-page__item-qty">x{item.cantidad}</span>
                 <span className="cart-page__item-price">
-                  ${(item.precioBase * item.cantidad).toFixed(2)}
+                  ${(item.precioUnitario * item.cantidad).toFixed(2)}
                 </span>
                 <button
                   className="cart-page__remove"
                   type="button"
-                  onClick={() => removeItem(item.id)}
+                  onClick={() => removeItem(item.key)}
                 >
                   QUITAR
                 </button>
@@ -39,6 +38,10 @@ const CartPage = () => {
             <span className="cart-page__total-label">TOTAL</span>
             <span className="cart-page__total">${total.toFixed(2)}</span>
           </footer>
+
+          <Link className="cart-page__checkout" to="/checkout">
+            IR A PAGAR
+          </Link>
         </>
       )}
     </main>

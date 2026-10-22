@@ -13,6 +13,12 @@ const readStoredCart = () => {
   }
 };
 
+const buildKey = (productoId, licenciaId) =>
+  `${productoId}::${licenciaId === null || licenciaId === undefined ? 'PHYS' : licenciaId}`;
+
+const buildSnapshotName = (nombre, licenciaNombre) =>
+  licenciaNombre ? `${nombre} (${licenciaNombre})` : nombre;
+
 export const CartProvider = ({ children }) => {
   const [items, setItems] = useState(readStoredCart);
 
@@ -20,39 +26,57 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
   }, [items]);
 
-  const addItem = (product) => {
+  const addItem = ({
+    productoId,
+    nombre,
+    tipoProducto,
+    precioUnitario,
+    licenciaId = null,
+    licenciaNombre = null,
+    imagenUrl = '',
+    cantidad = 1,
+  }) => {
+    if (tipoProducto === 'BEAT' && (licenciaId === null || licenciaId === undefined)) {
+      throw new Error('Los BEAT requieren licenciaId');
+    }
+
+    const key = buildKey(productoId, licenciaId);
+    const nombreSnapshot = buildSnapshotName(nombre, licenciaNombre);
+
     setItems((current) => {
-      const existing = current.find((item) => item.id === product.id);
+      const existing = current.find((item) => item.key === key);
       if (existing) {
         return current.map((item) =>
-          item.id === product.id
-            ? { ...item, cantidad: item.cantidad + 1 }
+          item.key === key
+            ? { ...item, cantidad: item.cantidad + cantidad }
             : item
         );
       }
       return [
         ...current,
         {
-          id: product.id,
-          nombre: product.nombre,
-          precioBase: product.precioBase,
-          imagenUrl: product.imagenUrl,
-          tipoProducto: product.tipoProducto,
-          cantidad: 1,
+          key,
+          productoId,
+          licenciaId,
+          nombreSnapshot,
+          precioUnitario,
+          cantidad,
+          imagenUrl,
+          tipoProducto,
         },
       ];
     });
   };
 
-  const removeItem = (id) => {
-    setItems((current) => current.filter((item) => item.id !== id));
+  const removeItem = (key) => {
+    setItems((current) => current.filter((item) => item.key !== key));
   };
 
   const clearCart = () => setItems([]);
 
   const total = useMemo(
     () =>
-      items.reduce((acc, item) => acc + item.precioBase * item.cantidad, 0),
+      items.reduce((acc, item) => acc + item.precioUnitario * item.cantidad, 0),
     [items]
   );
 

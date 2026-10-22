@@ -1,0 +1,133 @@
+.checkout-page {
+  background: var(--bg-void);
+  color: var(--text-main);
+  font-family: var(--font-code);
+  margin: 0 auto;
+  max-width: 640px;
+  min-height: 100vh;
+  padding: 2rem;
+}
+
+.checkout-page__title {
+  border-bottom: 1px solid var(--border-hazard);
+  color: var(--toxic-green);
+  font-size: 1.25rem;
+  letter-spacing: 0.25em;
+  margin: 0 0 1.5rem;
+  padding-bottom: 0.75rem;
+}
+
+.checkout-page__items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.checkout-page__item {
+  align-items: center;
+  background: var(--surface-panel);
+  border-left: 2px solid var(--toxic-green-dim);
+  display: grid;
+  font-size: 0.85rem;
+  gap: 0.75rem;
+  grid-template-columns: 1fr auto auto;
+  padding: 0.7rem 0.9rem;
+}
+
+.checkout-page__item-qty {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.checkout-page__item-price {
+  color: var(--toxic-green);
+}
+
+.checkout-page__footer {
+  align-items: center;
+  border-top: 1px solid var(--border-hazard);
+  display: flex;
+  justify-content: space-between;
+  margin: 1.5rem 0;
+  padding-top: 0.85rem;
+}
+
+.checkout-page__total-label {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+}
+
+.checkout-page__total {
+  color: var(--toxic-green);
+  font-size: 1.15rem;
+}
+
+.checkout-page__confirm {
+  background: var(--toxic-green);
+  border: none;
+  color: var(--bg-void);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  padding: 0.85rem;
+  width: 100%;
+}
+
+.checkout-page__confirm:disabled {
+  filter: brightness(0.6);
+  cursor: not-allowed;
+}
+
+.checkout-page__error {
+  color: var(--toxic-red);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  margin-top: 0.75rem;
+}
+
+.checkout-page__empty {
+  border: 1px dashed var(--border-hazard);
+  color: var(--text-muted);
+  letter-spacing: 0.15em;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.checkout-page__receipt {
+  background: var(--surface-panel);
+  border-left: 3px solid var(--toxic-green);
+  display: grid;
+  font-size: 0.85rem;
+  gap: 0.4rem 1rem;
+  grid-template-columns: auto 1fr;
+  margin: 0 0 1.5rem;
+  padding: 1rem;
+}
+
+.checkout-page__receipt dt {
+  color: var(--text-muted);
+  letter-spacing: 0.2em;
+  font-size: 0.7rem;
+}
+
+.checkout-page__receipt dd {
+  color: var(--toxic-green);
+  margin: 0;
+}
+
+.checkout-page__back {
+  color: var(--text-main);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  text-decoration: none;
+}
+
+.checkout-page__back:hover {
+  color: var(--toxic-green);
+}
