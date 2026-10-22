@@ -8,9 +8,13 @@
 
 .catalog-page__title {
   color: var(--toxic-green);
+  font-family: var(--font-code);
+  font-size: 1.4rem;
+  font-weight: 700;
   letter-spacing: 0.2em;
-  border-bottom: 1px solid var(--border-hazard);
+  margin: 0 0 1rem;
   padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-hazard);
 }
 
 .catalog-page__status {
@@ -19,31 +23,4 @@
 
 .catalog-page__status--error {
   color: var(--toxic-red);
-}
-
-.catalog-page__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.catalog-page__item {
-  background-color: var(--surface-panel);
-  border: 1px solid var(--border-hazard);
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  padding: 1rem;
-}
-
-.catalog-page__item-price {
-  color: var(--toxic-green);
-}
-
-.catalog-page__item-type {
-  color: var(--text-muted);
-  font-size: 0.75rem;
 }

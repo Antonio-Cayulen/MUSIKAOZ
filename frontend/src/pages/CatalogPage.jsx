@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
+import ProductGrid from '../components/molecules/ProductGrid';
 import { getActiveProducts } from '../services/productService';
+import { useCart } from '../context/CartContext';
 import './CatalogPage.css';
 
 const CatalogPage = () => {
   const [products, setProducts] = useState([]);
-  const [status, setStatus] = useState('LOADING'); // LOADING | READY | ERROR
+  const [status, setStatus] = useState('LOADING');
+  const { addItem } = useCart();
 
   useEffect(() => {
     let isMounted = true;
@@ -25,6 +28,10 @@ const CatalogPage = () => {
     };
   }, []);
 
+  const handleAddToCart = (product) => {
+    addItem(product);
+  };
+
   return (
     <main className="catalog-page">
       <h1 className="catalog-page__title">MARKETPLACE</h1>
@@ -40,19 +47,7 @@ const CatalogPage = () => {
       )}
 
       {status === 'READY' && (
-        <ul className="catalog-page__grid">
-          {products.map((product) => (
-            <li className="catalog-page__item" key={product.id}>
-              <span className="catalog-page__item-name">{product.nombre}</span>
-              <span className="catalog-page__item-price">
-                ${product.precioBase.toFixed(2)}
-              </span>
-              <span className="catalog-page__item-type">
-                {product.tipoProducto}
-              </span>
-            </li>
-          ))}
-        </ul>
+        <ProductGrid products={products} onAddToCart={handleAddToCart} />
       )}
     </main>
   );
