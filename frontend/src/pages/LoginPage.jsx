@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import LoginForm from '../components/molecules/LoginForm';
+import LoginForm from '../components/organisms/LoginForm';
 import './LoginPage.css';
 
 const LoginPage = () => {

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import ProductGrid from '../components/molecules/ProductGrid';
+import ProductGrid from '../components/organisms/ProductGrid';
 import { getActiveProducts } from '../services/productService';
 import { useCart } from '../context/CartContext';
 import './CatalogPage.css';
