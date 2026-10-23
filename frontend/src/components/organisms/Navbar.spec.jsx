@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AuthProvider } from '../../context/AuthContext';
 import { CartProvider } from '../../context/CartContext';
+import { resetDatabase } from '../../data/db.js';
 import Navbar from './Navbar';
 
 const renderNavbar = () => {
@@ -17,14 +18,15 @@ const renderNavbar = () => {
 };
 
 describe('Navbar', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     localStorage.clear();
+    await resetDatabase();
   });
 
   it('oculta el link ADMIN cuando el rol es USER', () => {
     localStorage.setItem(
       'marketplace.auth',
-      JSON.stringify({ id: 2, name: 'user', role: 'USER' })
+      JSON.stringify({ id: 3, name: 'buyer', email: 'buyer@gmail.com', role: 'USER' })
     );
 
     renderNavbar();
@@ -35,7 +37,7 @@ describe('Navbar', () => {
   it('muestra el link ADMIN cuando el rol es ADMIN', () => {
     localStorage.setItem(
       'marketplace.auth',
-      JSON.stringify({ id: 1, name: 'admin', role: 'ADMIN' })
+      JSON.stringify({ id: 1, name: 'admin', email: 'admin@duoc.cl', role: 'ADMIN' })
     );
 
     renderNavbar();

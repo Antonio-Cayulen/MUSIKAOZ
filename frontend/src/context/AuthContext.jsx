@@ -1,4 +1,5 @@
 import { createContext, useContext, useMemo, useState } from 'react';
+import { db } from '../data/db.js';
 
 const STORAGE_KEY = 'marketplace.auth';
 
@@ -27,18 +28,26 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(readStoredAuth);
 
-  const login = ({ email, password }) => {
+  const login = async ({ email, password }) => {
     if (!isValidEmail(email) || !isValidPassword(password)) {
       return { ok: false, error: 'CREDENCIALES INVÁLIDAS' };
     }
 
-    // Mock del contrato POST /api/auth/login.
-    const role = email.trim().toLowerCase().startsWith('admin@') ? 'ADMIN' : 'USER';
+    const normalized = email.trim().toLowerCase();
+    const found = await db.findBy(
+      'users',
+      `item.email === ${JSON.stringify(normalized)} && item.password === ${JSON.stringify(password)}`
+    );
+
+    if (!found) {
+      return { ok: false, error: 'USUARIO O CONTRASEÑA INCORRECTOS' };
+    }
+
     const nextUser = {
-      id: 1,
-      name: email.split('@')[0],
-      email,
-      role,
+      id: found.id,
+      name: found.name,
+      email: found.email,
+      role: found.role,
     };
     localStorage.setItem(STORAGE_KEY, JSON.stringify(nextUser));
     setUser(nextUser);

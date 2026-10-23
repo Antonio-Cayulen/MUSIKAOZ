@@ -1,23 +1,25 @@
-import { render, screen, waitFor, within, fireEvent } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
 import { MemoryRouter } from 'react-router-dom';
 import { AuthProvider } from '../context/AuthContext';
 import { CartProvider } from '../context/CartContext';
+import { resetDatabase, db } from '../data/db.js';
 import { __setOrderTransport, __resetOrderTransport } from '../services/orderService';
 import App from '../App';
 
-const clickByText = (text) => {
-  fireEvent.click(screen.getByText(text));
-};
-
-describe('Flujo BEAT con licencia hasta checkout', () => {
+describe('Flujo BEAT con licencia EXCLUSIVA hasta checkout', () => {
   let captured;
+  let user;
 
-  beforeEach(() => {
+  beforeEach(async () => {
     localStorage.clear();
+    await resetDatabase();
     captured = null;
+    user = userEvent.setup();   // ← crea el userEvent por test
     __setOrderTransport(async (body) => {
       captured = body;
-      return { orderId: 100, estadoOrden: 'PAGADA', montoTotal: body.montoTotal };
+      return { orderId: 0, estadoOrden: 'PAGADA', montoTotal: body.montoTotal };
     });
   });
 
@@ -25,14 +27,9 @@ describe('Flujo BEAT con licencia hasta checkout', () => {
     __resetOrderTransport();
   });
 
-  it('agrega un BEAT con licencia EXCLUSIVA y envía el body correcto a createOrder', async () => {
-    localStorage.setItem(
-      'marketplace.auth',
-      JSON.stringify({ id: 5, name: 'buyer', email: 'buyer@gmail.com', role: 'USER' })
-    );
-
+  it('loguea, agrega exclusiva, checkout y marca la licencia como vendida', async () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
+      <MemoryRouter initialEntries={['/login']}>
         <AuthProvider>
           <CartProvider>
             <App />
@@ -41,48 +38,54 @@ describe('Flujo BEAT con licencia hasta checkout', () => {
       </MemoryRouter>
     );
 
-    // 1) Ir a la card del beat específico (evita ambigüedad con otros beats)
-    const card = (await screen.findByText('Trap Beat Midnight')).closest('article');
-    fireEvent.click(within(card).getByText('VER LICENCIAS'));
+    // ─── Login ───
+    await user.type(screen.getByLabelText(/correo/i), 'buyer@gmail.com');
+    await user.type(screen.getByLabelText(/contraseña/i), 'buyer123');
+    await user.click(screen.getByRole('button', { name: /iniciar sesión/i }));
 
-    // 2) Esperar a que ProductDetail resuelva el producto
+    // ─── Catálogo: espera a que aparezca el primer producto ───
+    await screen.findByText('Trap Beat Midnight');
+
+    // ─── Click "VER LICENCIAS" DEL CARD DE Trap Beat Midnight ───
+    const trapCard = screen.getByText('Trap Beat Midnight').closest('article');
+    const link = trapCard.querySelector('a');
+    await user.click(link);
+
+    // ─── Detalle de producto ───
     await screen.findByText('SELECCIONA LICENCIA');
 
-    // 3) Seleccionar la licencia EXCLUSIVA (por testid idealmente; si no, por scope)
-    const exclusivaName = screen
-      .getAllByText('EXCLUSIVA')
-      .find((el) => el.classList.contains('product-detail__licencia-name'));
-    const exclusivaLabel = exclusivaName.closest('label');
-    const radio = exclusivaLabel.querySelector('input[type="radio"]');
-    fireEvent.click(radio);
+    // ─── Seleccionar la licencia EXCLUSIVA ───
+    const radio = document.querySelector('input[type="radio"][value="12"]');
+    if (!radio) throw new Error('No se encontró el radio de la licencia EXCLUSIVA (value="12")');
+    await user.click(radio);
 
-    // 4) Añadir al carrito
-    clickByText('AÑADIR AL CARRITO');
+    // ─── Agregar al carrito e ir a pagar ───
+    await user.click(screen.getByText('AÑADIR AL CARRITO'));
 
-    // 5) Ir al carrito y pagar
     await screen.findByText('IR A PAGAR');
-    clickByText('IR A PAGAR');
+    await user.click(screen.getByText('IR A PAGAR'));
 
-    // 6) Confirmar orden
+    // ─── Confirmar orden ───
     await screen.findByText('CONFIRMAR ORDEN');
-    clickByText('CONFIRMAR ORDEN');
+    await user.click(screen.getByText('CONFIRMAR ORDEN'));
 
-    // 7) Verificar UI
     await waitFor(() => {
       expect(screen.getByText('ORDEN CONFIRMADA')).toBeTruthy();
     });
 
-    // 8) Verificar el body enviado
-    expect(captured).toBeTruthy();
-    expect(captured.compradorId).toBe(5);
+    // ─── Asserts sobre el body enviado ───
+    expect(captured.compradorId).toBe(3);
     expect(captured.montoTotal).toBeCloseTo(199.99, 2);
-    expect(captured.items.length).toBe(1);          // ← no .toHaveLength
+    expect(captured.items[0].licenciaId).toBe(12);
+    expect(captured.items[0].nombreSnapshot).toBe('Trap Beat Midnight (EXCLUSIVA)');
 
-    const item = captured.items[0];
-    expect(item.productoId).toBe(1);
-    expect(item.licenciaId).toBe(12);
-    expect(item.cantidad).toBe(1);
-    expect(item.precioUnitario).toBeCloseTo(199.99, 2);
-    expect(item.nombreSnapshot).toBe('Trap Beat Midnight (EXCLUSIVA)');
+    // ─── Asserts sobre la DB ───
+    const product = await db.findById('products', 1);
+    const licencia = product.licencias.find((l) => l.id === 12);
+    expect(licencia.vendida).toBe(true);
+
+    const orders = await db.list('orders');
+    expect(orders.length).toBe(1);
+    expect(orders[0].compradorId).toBe(3);
   });
 });

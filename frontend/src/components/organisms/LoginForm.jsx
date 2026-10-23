@@ -19,13 +19,17 @@ const LoginForm = ({ onSuccess }) => {
     return next;
   };
 
-  const handleSubmit = (event) => {
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const next = validate();
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
-    const result = login({ email, password });
+    setSubmitting(true);
+    const result = await login({ email, password });
+    setSubmitting(false);
     if (!result.ok) {
       setErrors({ form: result.error });
       return;
@@ -38,7 +42,7 @@ const LoginForm = ({ onSuccess }) => {
       <div className="login-form__panel">
         <header className="login-form__header">
           <span className="login-form__eyebrow">ACCESO</span>
-          <h1 className="login-form__title">INICIAR SESIÓN</h1>
+          <h1 className="login-form__title">Iniciar sesión en MusiKaoz</h1>
         </header>
 
         <div className="login-form__field">
@@ -81,8 +85,8 @@ const LoginForm = ({ onSuccess }) => {
 
         {errors.form && <p className="login-form__form-error">{errors.form}</p>}
 
-        <button className="login-form__submit" type="submit">
-          ENTRAR
+        <button className="login-form__submit" type="submit" disabled={submitting}>
+          {submitting ? 'CARGANDO...' : 'INICIAR SESIÓN'}
         </button>
 
         <div className="login-form__status">
