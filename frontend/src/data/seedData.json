@@ -1,0 +1,87 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@duoc.cl",
+      "password": "admin123",
+      "name": "admin",
+      "role": "ADMIN"
+    },
+    {
+      "id": 2,
+      "email": "profesor@profesor.duoc.cl",
+      "password": "profe123",
+      "name": "profesor",
+      "role": "ADMIN"
+    },
+    {
+      "id": 3,
+      "email": "buyer@gmail.com",
+      "password": "buyer123",
+      "name": "buyer",
+      "role": "USER"
+    }
+  ],
+  "products": [
+    {
+      "id": 1,
+      "nombre": "Trap Beat Midnight",
+      "precioBase": 29.99,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=BEAT",
+      "tipoProducto": "BEAT",
+      "estado": "ACTIVO",
+      "licencias": [
+        { "id": 11, "nombre": "NO_EXCLUSIVA", "precio": 29.99, "vendida": false },
+        { "id": 12, "nombre": "EXCLUSIVA", "precio": 199.99, "vendida": false }
+      ]
+    },
+    {
+      "id": 2,
+      "nombre": "Micrófono Condensador",
+      "precioBase": 150.0,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=MIC",
+      "tipoProducto": "EQUIPO",
+      "estado": "ACTIVO"
+    },
+    {
+      "id": 3,
+      "nombre": "Boom Bap Beat Relic",
+      "precioBase": 19.99,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=BEAT",
+      "tipoProducto": "BEAT",
+      "estado": "ACTIVO",
+      "licencias": [
+        { "id": 21, "nombre": "NO_EXCLUSIVA", "precio": 19.99, "vendida": false },
+        { "id": 22, "nombre": "EXCLUSIVA", "precio": 149.99, "vendida": false }
+      ]
+    },
+    {
+      "id": 4,
+      "nombre": "Interfaz de Audio 2x2",
+      "precioBase": 220.0,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=IFACE",
+      "tipoProducto": "EQUIPO",
+      "estado": "ACTIVO"
+    },
+    {
+      "id": 5,
+      "nombre": "Drill Beat Concrete",
+      "precioBase": 34.5,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=BEAT",
+      "tipoProducto": "BEAT",
+      "estado": "ACTIVO",
+      "licencias": [
+        { "id": 31, "nombre": "NO_EXCLUSIVA", "precio": 34.5, "vendida": false }
+      ]
+    },
+    {
+      "id": 6,
+      "nombre": "Monitores de Estudio 5\"",
+      "precioBase": 310.0,
+      "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=MON",
+      "tipoProducto": "EQUIPO",
+      "estado": "ACTIVO"
+    }
+  ],
+  "orders": []
+}
