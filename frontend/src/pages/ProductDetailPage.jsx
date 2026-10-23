@@ -11,19 +11,21 @@ const ProductDetailPage = () => {
   const [product, setProduct] = useState(null);
   const [status, setStatus] = useState('LOADING');
   const [licenciaId, setLicenciaId] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     let isMounted = true;
     setStatus('LOADING');
     getProductById(id).then((data) => {
       if (!isMounted) return;
-      if (!data) {
+      if (!data || data.estado !== 'ACTIVO') {
         setStatus('NOT_FOUND');
         return;
       }
       setProduct(data);
       if (data.tipoProducto === 'BEAT' && data.licencias?.length) {
-        setLicenciaId(data.licencias[0].id);
+        const firstAvailable = data.licencias.find((l) => !l.vendida);
+        setLicenciaId(firstAvailable ? firstAvailable.id : null);
       }
       setStatus('READY');
     });
@@ -55,8 +57,14 @@ const ProductDetailPage = () => {
     ? product.licencias.find((l) => l.id === licenciaId)
     : null;
   const unitPrice = selectedLicencia ? selectedLicencia.precio : product.precioBase;
+  const canAdd = !isBeat || (selectedLicencia && !selectedLicencia.vendida);
 
   const handleAdd = () => {
+    if (!canAdd) {
+      setError('LICENCIA NO DISPONIBLE');
+      return;
+    }
+    setError('');
     addItem({
       productoId: product.id,
       nombre: product.nombre,
@@ -87,38 +95,49 @@ const ProductDetailPage = () => {
         {isBeat && (
           <fieldset className="product-detail__licencias">
             <legend className="product-detail__legend">SELECCIONA LICENCIA</legend>
-            {product.licencias.map((licencia) => (
-              <label
-                className={`product-detail__licencia${
-                  licencia.id === licenciaId
-                    ? ' product-detail__licencia--active'
-                    : ''
-                }`}
-                key={licencia.id}
-              >
-                <input
-                  type="radio"
-                  name="licencia"
-                  value={licencia.id}
-                  checked={licencia.id === licenciaId}
-                  onChange={() => setLicenciaId(licencia.id)}
-                />
-                <span className="product-detail__licencia-name">
-                  {licencia.nombre}
-                </span>
-                <span className="product-detail__licencia-price">
-                  ${licencia.precio.toFixed(2)}
-                </span>
-              </label>
-            ))}
+            {product.licencias.map((licencia) => {
+              const disabled = licencia.vendida;
+              const active = licencia.id === licenciaId;
+              return (
+                <label
+                  className={`product-detail__licencia${
+                    active ? ' product-detail__licencia--active' : ''
+                  }${disabled ? ' product-detail__licencia--disabled' : ''}`}
+                  key={licencia.id}
+                >
+                  <input
+                    type="radio"
+                    name="licencia"
+                    value={licencia.id}
+                    checked={active}
+                    disabled={disabled}
+                    onChange={() => setLicenciaId(licencia.id)}
+                  />
+                  <span className="product-detail__licencia-name">
+                    {licencia.nombre}
+                    {disabled && ' — VENDIDA'}
+                  </span>
+                  <span className="product-detail__licencia-price">
+                    ${licencia.precio.toFixed(2)}
+                  </span>
+                </label>
+              );
+            })}
           </fieldset>
         )}
 
         <span className="product-detail__price">${unitPrice.toFixed(2)}</span>
 
-        <button className="product-detail__add" type="button" onClick={handleAdd}>
+        <button
+          className="product-detail__add"
+          type="button"
+          onClick={handleAdd}
+          disabled={!canAdd}
+        >
           AÑADIR AL CARRITO
         </button>
+
+        {error && <p className="product-detail__error">{error}</p>}
       </div>
     </main>
   );

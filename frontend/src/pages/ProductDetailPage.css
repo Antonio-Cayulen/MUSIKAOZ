@@ -121,6 +121,17 @@
   color: var(--toxic-red);
 }
 
+.product-detail__licencia--disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.product-detail__error {
+  color: var(--toxic-red);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+}
+
 @media (max-width: 720px) {
   .product-detail {
     grid-template-columns: 1fr;
