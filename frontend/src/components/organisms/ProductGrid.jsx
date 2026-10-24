@@ -1,4 +1,5 @@
 import ProductCard from '../atoms/ProductCard';
+import { getMarketStatus } from '../../services/productService';
 import './ProductGrid.css';
 
 const ProductGrid = ({ products, onAddToCart }) => {
@@ -6,6 +7,7 @@ const ProductGrid = ({ products, onAddToCart }) => {
     <section className="product-grid">
       {products.map((product) => {
         const isBeat = product.tipoProducto === 'BEAT';
+        const status = getMarketStatus(product);
         return (
           <ProductCard
             key={product.id}
@@ -15,6 +17,7 @@ const ProductGrid = ({ products, onAddToCart }) => {
             tipoProducto={product.tipoProducto}
             isOffer={product.isOffer ?? false}
             detailsHref={isBeat ? `/product/${product.id}` : null}
+            commercable={status === 'DISPONIBLE'}
             onAddToCart={() => onAddToCart?.(product)}
           />
         );

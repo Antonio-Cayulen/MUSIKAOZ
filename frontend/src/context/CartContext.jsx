@@ -35,9 +35,13 @@ export const CartProvider = ({ children }) => {
     licenciaNombre = null,
     imagenUrl = '',
     cantidad = 1,
+    marketStatus = 'DISPONIBLE',
   }) => {
     if (tipoProducto === 'BEAT' && (licenciaId === null || licenciaId === undefined)) {
       throw new Error('Los BEAT requieren licenciaId');
+    }
+    if (marketStatus !== 'DISPONIBLE') {
+      throw new Error('El producto no está disponible para compra');
     }
 
     const key = buildKey(productoId, licenciaId);

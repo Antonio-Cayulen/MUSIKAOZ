@@ -8,6 +8,7 @@ const ProductCard = ({
   tipoProducto,
   isOffer = false,
   detailsHref = null,
+  commercable = true,
   onAddToCart,
 }) => {
   const priceClassName = `product-card__price${
@@ -25,6 +26,11 @@ const ProductCard = ({
           loading="lazy"
         />
         {isOffer && <span className="product-card__badge">OFERTA</span>}
+        {!commercable && (
+          <span className="product-card__badge product-card__badge--off">
+            NO DISPONIBLE
+          </span>
+        )}
       </div>
 
       <div className="product-card__body">
@@ -37,7 +43,7 @@ const ProductCard = ({
         <Link className="product-card__action" to={detailsHref}>
           VER LICENCIAS
         </Link>
-      ) : (
+      ) : commercable ? (
         <button
           className="product-card__action"
           type="button"
@@ -45,6 +51,10 @@ const ProductCard = ({
         >
           AÑADIR AL CARRITO
         </button>
+      ) : (
+        <span className="product-card__action product-card__action--disabled">
+          NO DISPONIBLE
+        </span>
       )}
     </article>
   );

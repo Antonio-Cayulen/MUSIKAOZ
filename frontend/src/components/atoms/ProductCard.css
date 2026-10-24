@@ -36,6 +36,12 @@
   top: 0.5rem;
 }
 
+.product-card__badge--off {
+  background: var(--toxic-red);
+  left: auto;
+  right: 0.5rem;
+}
+
 .product-card__body {
   display: flex;
   flex-direction: column;
@@ -83,4 +89,13 @@
 .product-card__action:hover {
   background-color: var(--toxic-green);
   color: var(--bg-void);
+}
+
+.product-card__action--disabled {
+  background: transparent;
+  border: 1px dashed var(--border-hazard);
+  color: var(--text-muted);
+  cursor: not-allowed;
+  text-align: center;
+  display: block;
 }

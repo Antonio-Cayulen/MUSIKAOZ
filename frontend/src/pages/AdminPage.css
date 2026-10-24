@@ -73,7 +73,65 @@
   color: var(--toxic-green);
 }
 
-.admin-page__item-state--off {
+.admin-page__item-state--disponible {
+  color: var(--toxic-green);
+}
+
+.admin-page__item-state--retirado {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.admin-page__item-state--inactivo {
+  color: var(--toxic-red);
+}
+
+.admin-page__actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.admin-page__action {
+  background: transparent;
+  border: 1px solid var(--border-hazard);
+  color: var(--text-main);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.62rem;
+  letter-spacing: 0.15em;
+  padding: 0.3rem 0.5rem;
+}
+
+.admin-page__action:hover {
+  border-color: var(--toxic-green);
+  color: var(--toxic-green);
+}
+
+.admin-page__action--danger:hover {
+  border-color: var(--toxic-red);
+  color: var(--toxic-red);
+}
+
+.admin-page__action--restore:hover {
+  border-color: var(--toxic-green);
+  color: var(--toxic-green);
+}
+
+.admin-page__cancel {
+  background: transparent;
+  border: 1px dashed var(--border-hazard);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+
+.admin-page__cancel:hover {
+  border-color: var(--toxic-red);
   color: var(--toxic-red);
 }
 

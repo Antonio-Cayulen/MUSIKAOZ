@@ -97,4 +97,12 @@ describe('CartContext', () => {
 
     expect(localStorage.setItem).toHaveBeenCalled();
   });
+
+  it('rechaza agregar un beat RETIRADO', () => {
+    const { result } = renderHook(() => useCart(), { wrapper });
+
+    expect(() => {
+      result.current.addItem(beat({ marketStatus: 'RETIRADO' }));
+    }).toThrowError();
+  });
 });

@@ -1,8 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getProductById } from '../services/productService';
+import { getProductById, getMarketStatus } from '../services/productService';
 import { useCart } from '../context/CartContext';
 import './ProductDetailPage.css';
+
+const BANNER_TEXT = {
+  RETIRADO: 'ESTE BEAT YA FUE VENDIDO EN EXCLUSIVA',
+  INACTIVO: 'PRODUCTO INACTIVO — NO DISPONIBLE PARA COMPRA',
+};
 
 const ProductDetailPage = () => {
   const { id } = useParams();
@@ -18,7 +23,7 @@ const ProductDetailPage = () => {
     setStatus('LOADING');
     getProductById(id).then((data) => {
       if (!isMounted) return;
-      if (!data || data.estado !== 'ACTIVO') {
+      if (!data) {
         setStatus('NOT_FOUND');
         return;
       }
@@ -53,15 +58,16 @@ const ProductDetailPage = () => {
   }
 
   const isBeat = product.tipoProducto === 'BEAT';
+  const marketStatus = getMarketStatus(product);
   const selectedLicencia = isBeat
     ? product.licencias.find((l) => l.id === licenciaId)
     : null;
   const unitPrice = selectedLicencia ? selectedLicencia.precio : product.precioBase;
-  const canAdd = !isBeat || (selectedLicencia && !selectedLicencia.vendida);
+  const canAdd = marketStatus === 'DISPONIBLE';
 
   const handleAdd = () => {
     if (!canAdd) {
-      setError('LICENCIA NO DISPONIBLE');
+      setError('PRODUCTO NO DISPONIBLE');
       return;
     }
     setError('');
@@ -74,6 +80,7 @@ const ProductDetailPage = () => {
       licenciaNombre: selectedLicencia ? selectedLicencia.nombre : null,
       imagenUrl: product.imagenUrl,
       cantidad: 1,
+      marketStatus,
     });
     navigate('/cart');
   };
@@ -92,11 +99,15 @@ const ProductDetailPage = () => {
         <span className="product-detail__type">{product.tipoProducto}</span>
         <h1 className="product-detail__title">{product.nombre}</h1>
 
+        {marketStatus !== 'DISPONIBLE' && (
+          <p className="product-detail__banner">{BANNER_TEXT[marketStatus]}</p>
+        )}
+
         {isBeat && (
           <fieldset className="product-detail__licencias">
             <legend className="product-detail__legend">SELECCIONA LICENCIA</legend>
             {product.licencias.map((licencia) => {
-              const disabled = licencia.vendida;
+              const disabled = licencia.vendida || !canAdd;
               const active = licencia.id === licenciaId;
               return (
                 <label
@@ -115,7 +126,7 @@ const ProductDetailPage = () => {
                   />
                   <span className="product-detail__licencia-name">
                     {licencia.nombre}
-                    {disabled && ' — VENDIDA'}
+                    {licencia.vendida && ' — VENDIDA'}
                   </span>
                   <span className="product-detail__licencia-price">
                     ${licencia.precio.toFixed(2)}

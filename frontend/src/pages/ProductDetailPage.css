@@ -109,6 +109,11 @@
   filter: brightness(1.15);
 }
 
+.product-detail__add:disabled {
+  cursor: not-allowed;
+  filter: brightness(0.4);
+}
+
 .product-detail__status {
   color: var(--text-muted);
   grid-column: 1 / -1;
@@ -130,6 +135,16 @@
   color: var(--toxic-red);
   font-size: 0.75rem;
   letter-spacing: 0.1em;
+}
+
+.product-detail__banner {
+  background: var(--toxic-red-dim);
+  border-left: 3px solid var(--toxic-red);
+  color: var(--toxic-red);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  margin: 0;
+  padding: 0.6rem 0.85rem;
 }
 
 @media (max-width: 720px) {
