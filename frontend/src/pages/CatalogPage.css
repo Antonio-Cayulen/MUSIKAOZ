@@ -24,3 +24,38 @@
 .catalog-page__status--error {
   color: var(--toxic-red);
 }
+
+.catalog-page__empty {
+  align-items: center;
+  border: 1px dashed var(--border-hazard);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.catalog-page__empty-text {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  margin: 0;
+}
+
+.catalog-page__empty-clear {
+  background: transparent;
+  border: 1px solid var(--toxic-green);
+  color: var(--toxic-green);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  padding: 0.5rem 0.9rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.catalog-page__empty-clear:hover {
+  background: var(--toxic-green);
+  color: var(--bg-void);
+}
+
