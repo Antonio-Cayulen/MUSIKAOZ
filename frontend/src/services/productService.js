@@ -6,8 +6,12 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 export const getMarketStatus = (product) => {
   if (!product) return null;
   if (product.estado === 'INACTIVO') return 'INACTIVO';
-  const exclusiva = product.licencias?.find((l) => l.nombre === 'EXCLUSIVA');
-  if (exclusiva?.vendida) return 'RETIRADO';
+  if (product.tipoProducto === 'BEAT') {
+    const exclusiva = product.licencias?.find((l) => l.nombre === 'EXCLUSIVA');
+    if (exclusiva?.vendida) return 'RETIRADO';
+    return 'DISPONIBLE';
+  }
+  if ((product.stock ?? 0) <= 0) return 'AGOTADO';
   return 'DISPONIBLE';
 };
 

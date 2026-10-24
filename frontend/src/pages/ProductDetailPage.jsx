@@ -7,6 +7,7 @@ import './ProductDetailPage.css';
 const BANNER_TEXT = {
   RETIRADO: 'ESTE BEAT YA FUE VENDIDO EN EXCLUSIVA',
   INACTIVO: 'PRODUCTO INACTIVO — NO DISPONIBLE PARA COMPRA',
+  AGOTADO: 'PRODUCTO AGOTADO — SIN STOCK DISPONIBLE',
 };
 
 const ProductDetailPage = () => {
@@ -135,6 +136,12 @@ const ProductDetailPage = () => {
               );
             })}
           </fieldset>
+        )}
+
+        {!isBeat && (
+          <span className="product-detail__stock">
+            STOCK DISPONIBLE: {product.stock ?? 0}
+          </span>
         )}
 
         <span className="product-detail__price">${unitPrice.toFixed(2)}</span>

@@ -86,6 +86,11 @@
   color: var(--toxic-red);
 }
 
+.admin-page__item-state--agotado {
+  color: var(--toxic-red);
+  font-weight: 700;
+}
+
 .admin-page__actions {
   display: flex;
   gap: 0.4rem;

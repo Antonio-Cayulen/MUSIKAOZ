@@ -93,6 +93,12 @@
   font-size: 1.5rem;
 }
 
+.product-detail__stock {
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+}
+
 .product-detail__add {
   background: var(--toxic-green);
   border: none;

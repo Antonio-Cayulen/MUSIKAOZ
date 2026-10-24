@@ -1,26 +1,8 @@
 {
   "users": [
-    {
-      "id": 1,
-      "email": "admin@duoc.cl",
-      "password": "admin123",
-      "name": "admin",
-      "role": "ADMIN"
-    },
-    {
-      "id": 2,
-      "email": "profesor@profesor.duoc.cl",
-      "password": "profe123",
-      "name": "profesor",
-      "role": "ADMIN"
-    },
-    {
-      "id": 3,
-      "email": "buyer@gmail.com",
-      "password": "buyer123",
-      "name": "buyer",
-      "role": "USER"
-    }
+    { "id": 1, "email": "admin@duoc.cl", "password": "admin123", "name": "admin", "role": "ADMIN" },
+    { "id": 2, "email": "profesor@profesor.duoc.cl", "password": "profe123", "name": "profesor", "role": "ADMIN" },
+    { "id": 3, "email": "buyer@gmail.com", "password": "buyer123", "name": "buyer", "role": "USER" }
   ],
   "products": [
     {
@@ -41,7 +23,8 @@
       "precioBase": 150.0,
       "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=MIC",
       "tipoProducto": "EQUIPO",
-      "estado": "ACTIVO"
+      "estado": "ACTIVO",
+      "stock": 5
     },
     {
       "id": 3,
@@ -61,7 +44,8 @@
       "precioBase": 220.0,
       "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=IFACE",
       "tipoProducto": "EQUIPO",
-      "estado": "ACTIVO"
+      "estado": "ACTIVO",
+      "stock": 3
     },
     {
       "id": 5,
@@ -80,7 +64,8 @@
       "precioBase": 310.0,
       "imagenUrl": "https://placehold.co/600x600/0f1117/39ff14?text=MON",
       "tipoProducto": "EQUIPO",
-      "estado": "ACTIVO"
+      "estado": "ACTIVO",
+      "stock": 2
     }
   ],
   "orders": []

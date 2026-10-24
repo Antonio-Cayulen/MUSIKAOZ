@@ -19,6 +19,33 @@ export const __resetOrderTransport = () => {
   };
 };
 
+const validateStock = async (items) => {
+  for (const item of items) {
+    const product = await db.findById('products', item.productoId);
+    if (!product) {
+      throw new Error(`PRODUCTO NO ENCONTRADO: ${item.productoId}`);
+    }
+    if (product.tipoProducto === 'EQUIPO') {
+      const available = product.stock ?? 0;
+      if (available < item.cantidad) {
+        throw new Error(`STOCK INSUFICIENTE: ${product.nombre} (disponible: ${available})`);
+      }
+    }
+  }
+};
+
+const validateExclusivas = async (items) => {
+  for (const item of items) {
+    if (item.licenciaId === null) continue;
+    const product = await db.findById('products', item.productoId);
+    if (!product || !product.licencias) continue;
+    const target = product.licencias.find((l) => l.id === item.licenciaId);
+    if (target && target.nombre === 'EXCLUSIVA' && target.vendida) {
+      throw new Error('LICENCIA EXCLUSIVA YA VENDIDA');
+    }
+  }
+};
+
 const persistOrder = async (body) => {
   const order = await db.create('orders', {
     compradorId: body.compradorId,
@@ -28,9 +55,16 @@ const persistOrder = async (body) => {
   });
 
   for (const item of body.items) {
-    if (item.licenciaId === null) continue;
     const product = await db.findById('products', item.productoId);
-    if (!product || !product.licencias) continue;
+    if (!product) continue;
+
+    if (product.tipoProducto === 'EQUIPO') {
+      const newStock = (product.stock ?? 0) - item.cantidad;
+      await db.update('products', product.id, { stock: newStock });
+      continue;
+    }
+
+    if (item.licenciaId === null || !product.licencias) continue;
     const target = product.licencias.find((l) => l.id === item.licenciaId);
     if (!target || target.nombre !== 'EXCLUSIVA') continue;
     const updatedLicencias = product.licencias.map((l) =>
@@ -43,22 +77,10 @@ const persistOrder = async (body) => {
 };
 
 export const createOrder = async (body) => {
-  const result = await transport(body);
+  await validateStock(body.items);
+  await validateExclusivas(body.items);
 
-  const exclusivaVendida = await (async () => {
-    for (const item of body.items) {
-      if (item.licenciaId === null) continue;
-      const product = await db.findById('products', item.productoId);
-      if (!product || !product.licencias) continue;
-      const target = product.licencias.find((l) => l.id === item.licenciaId);
-      if (target && target.nombre === 'EXCLUSIVA' && target.vendida) return true;
-    }
-    return false;
-  })();
-
-  if (exclusivaVendida) {
-    throw new Error('LICENCIA EXCLUSIVA YA VENDIDA');
-  }
+  await transport(body);
 
   const order = await persistOrder(body);
   return {

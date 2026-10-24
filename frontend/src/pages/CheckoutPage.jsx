@@ -10,11 +10,13 @@ const CheckoutPage = () => {
   const { items, total, clearCart } = useCart();
   const [status, setStatus] = useState('IDLE'); // IDLE | SUBMITTING | SUCCESS | ERROR
   const [order, setOrder] = useState(null);
+  const [error, setError] = useState('');
 
   if (!user) return <Navigate to="/login" replace />;
 
   const handleConfirm = async () => {
     setStatus('SUBMITTING');
+    setError('');
     try {
       const body = {
         compradorId: user.id,
@@ -31,7 +33,8 @@ const CheckoutPage = () => {
       setOrder(result);
       setStatus('SUCCESS');
       clearCart();
-    } catch {
+    } catch (err) {
+      setError(err.message || 'ERROR AL CREAR LA ORDEN');
       setStatus('ERROR');
     }
   };
@@ -95,8 +98,8 @@ const CheckoutPage = () => {
         {status === 'SUBMITTING' ? 'PROCESANDO...' : 'CONFIRMAR ORDEN'}
       </button>
 
-      {status === 'ERROR' && (
-        <p className="checkout-page__error">ERROR AL CREAR LA ORDEN</p>
+      {status === 'ERROR' && error && (
+        <p className="checkout-page__error">{error}</p>
       )}
     </main>
   );

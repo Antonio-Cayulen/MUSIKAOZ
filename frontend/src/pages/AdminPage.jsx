@@ -12,8 +12,9 @@ import './AdminPage.css';
 
 const STATUS_LABEL = {
   DISPONIBLE: 'DISPONIBLE',
-  RETIRADO: 'RETIRADO (EXCLUSIVA VENDIDA)',
-  INACTIVO: 'INACTIVO (MANUAL)',
+  RETIRADO: 'RETIRADO',
+  INACTIVO: 'INACTIVO',
+  AGOTADO: 'AGOTADO (SIN STOCK)',
 };
 
 const AdminPage = () => {
@@ -40,6 +41,7 @@ const AdminPage = () => {
     await updateProduct(editing.id, {
       nombre: payload.nombre,
       precioBase: payload.precioBase,
+      stock: payload.stock,
       imagenUrl: payload.imagenUrl,
       tipoProducto: payload.tipoProducto,
     });
