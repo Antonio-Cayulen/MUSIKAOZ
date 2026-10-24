@@ -59,8 +59,43 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const register = async ({ email, password }) => {
+    if (!isValidEmail(email)) {
+      return { ok: false, error: 'CORREO INVÁLIDO' };
+    }
+    if (!isValidPassword(password)) {
+      return { ok: false, error: 'CONTRASEÑA DEBE TENER ENTRE 4 Y 10 CARACTERES' };
+    }
+
+    const normalized = email.trim().toLowerCase();
+    const existing = await db.findBy(
+      'users',
+      `item.email === ${JSON.stringify(normalized)}`
+    );
+    if (existing) {
+      return { ok: false, error: 'EMAIL YA REGISTRADO' };
+    }
+
+    const created = await db.create('users', {
+      email: normalized,
+      password,
+      name: normalized.split('@')[0],
+      role: 'USER',
+    });
+
+    const nextUser = {
+      id: created.id,
+      name: created.name,
+      email: created.email,
+      role: created.role,
+    };
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(nextUser));
+    setUser(nextUser);
+    return { ok: true };
+  };
+
   const value = useMemo(
-    () => ({ user, login, logout, isAuthenticated: !!user }),
+    () => ({ user, login, register, logout, isAuthenticated: !!user }),
     [user]
   );
 
